@@ -1,56 +1,60 @@
 {% extends "layout.html" %}
-
 {% block title %}
     Review Forms
 {% endblock %}
-
 {% block content %}
-    <h2>Review Forms</h2>
-
-    <!-- Requester Info Form -->
-    <h3>Requester Info Form</h3>
     <table border="1px">
+        <h3>Review Forms</h3>
         <thead>
             <td><strong>Name</strong></td>
             <td><strong>Email</strong></td>
-        </thead>
-        <tr>
-            <td></td>
-            <td>{{ requester_name }}</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>{{ requester_email }}</td>
-        </tr>
-        <!-- Add other fields as needed -->
-    </table>
-    <br>
-    <button type="submit">Edit</button>
-    <button type="submit">Delete</button>
-
-    <!-- Project Info Form -->
-    <h3>Project Info Form</h3>
-    <table border="1px">
-        <thead>
-            <td><strong>Project ID</strong></td>
+            <td><strong>Contact</strong></td>
+            <td><strong>Department ID</strong></td>
             <td><strong>Requester ID</strong></td>
+            <td><strong>Project Title</strong></td>
             <td><strong>Output</strong></td>
             <td><strong>Objective</strong></td>
+            <td><strong>Recipient</strong></td>
+            <td><strong>Mandatory</strong></td>
             <td><strong>Date Filed</strong></td>
             <td><strong>Date Needed</strong></td>
             <td><strong>Additional Info</strong></td>
             <td><strong>Admin ID</strong></td>
             <td><strong>Status ID</strong></td>
+            <td colspan="2"><strong>Actions</strong></td>
         </thead>
-        <!-- Add rows for Project Info Form -->
-        <!-- Example row -->
-        <tr>
-            <td></td>
-            <td>{{ project_id }}</td>
-        </tr>
-        <!-- Add other rows as needed -->
+        <tbody>
+            {% for requester_row, project_info_row in zipped_data %}
+<tr>
+    <td>{{ requester_row[1] }}</td>
+    <td>{{ requester_row[2] }}</td>
+    <td>{{ requester_row[3] }}</td>
+    <td>{{ requester_row[4] }}</td>
+    <td>{{ project_info_row[1] }}</td>
+    <td>{{ project_info_row[2] }}</td>
+    <td>{{ project_info_row[3] }}</td>
+    <td>{{ project_info_row[4] }}</td>
+    <td>{{ project_info_row[5] }}</td>
+    <td>{{ project_info_row[6] }}</td>
+    <td>{{ project_info_row[7] }}</td>
+    <td>{{ project_info_row[8] }}</td>
+    <td>{{ project_info_row[9] }}</td>
+    <td>{{ project_info_row[10] }}</td>
+    <td>{{ project_info_row[11] }}</td>
+    <td>
+        <form action="{{url_for('admin_login')}}" method="POST">
+            <input type="hidden" name="id" value="{{ project_info_row[0] }}">
+            <input type="submit" value="Edit">
+        </form>
+    </td>
+    <td>
+        <form onsubmit="return confirm('Are you sure you want to DELETE this Data from the Database?');" action="{{url_for('requester_form')}}" method="POST">
+            <input type="hidden" name="id" value="{{ project_info_row[0] }}">
+            <input type="submit" value="Delete">
+        </form>
+    </td>
+</tr>
+{% endfor %}
+        </tbody>
     </table>
-    <br>
-    <button type="submit">Edit</button>
-    <button type="submit">Delete</button>
 {% endblock %}

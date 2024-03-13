@@ -1,5 +1,4 @@
 import sqlite3
-
 from flask import Flask, redirect, render_template, request, url_for
 
 app = Flask(__name__)
@@ -26,10 +25,10 @@ def requester_form():
         name = request.form.get("name")
         email = request.form.get("email")
         contact = request.form.get("contact")
-        department_id = request.form.get("department_id")  # Assuming you have a department dropdown or input
+        department = request.form.get("department")  # corrected field name
         with sqlite3.connect('database.db') as conn:
             cursor = conn.cursor()
-            cursor.execute("INSERT INTO requester (name, email, department_id, contact) VALUES (?, ?, ?, ?)", (name, email, department_id, contact))
+            cursor.execute("INSERT INTO requester_new (name, email, contact, department_id) VALUES (?, ?, ?, ?)", (name, email, contact, department))
             conn.commit()
         return redirect(url_for("project_info"))
     else:
@@ -40,18 +39,18 @@ def requester_form():
 def project_info():
     if request.method == "POST":
         # Handle form submission for project info
-        project_id = request.form.get("project_id")
-        requester_id = request.form.get("requester_id")
+        project_title = request.form.get("project_title")
         output = request.form.get("output")
         objective = request.form.get("objective")
+        recipient = request.form.get("recipient")
+        mandatory = request.form.get("mandatory")
         date_filed = request.form.get("date_filed")
         date_needed = request.form.get("date_needed")
         additional_info = request.form.get("additional_info")
-        admin_id = request.form.get("admin_id")
-        status_id = request.form.get("status_id")
         with sqlite3.connect('database.db') as conn:
             cursor = conn.cursor()
-            cursor.execute("INSERT INTO project_info (project_id, requester_id, output, objective, date_filed, date_needed, add_info, admin_id, status_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", (project_id, requester_id, output, objective, date_filed, date_needed, additional_info, admin_id, status_id))
+            cursor.execute("INSERT INTO project_info_new1 (project_title, output, objective, recipient, mandatory, date_filed, date_needed, add_info) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                           (project_title, output, objective, recipient, mandatory, date_filed, date_needed, additional_info))
             conn.commit()
         return redirect(url_for("home"))  # Redirect to home after submission
     else:
@@ -72,11 +71,36 @@ def admin_login():
 def review_forms():
     with sqlite3.connect('database.db') as conn:
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM requester")
+        cursor.execute("SELECT * FROM requester_new")
         requester_data = cursor.fetchall()
-        cursor.execute("SELECT * FROM project_info")
+        cursor.execute("SELECT * FROM project_info_new1")
         project_info_data = cursor.fetchall()
-    return render_template("review_forms.html", requester_data=requester_data, project_info_data=project_info_data)
+        
+    # Zipping the data together
+    zipped_data = zip(requester_data, project_info_data)
+    
+    return render_template("review_forms.html", zipped_data=zipped_data)
+
+@app.route("/delete", methods=['POST','GET'])
+def delete():
+    if request.method == 'POST':
+        try:
+            # Use the hidden input value of id from the form to get the rowid
+            rowid = request.form['id']
+            # Connect to the database and DELETE a specific record based on rowid
+            with sqlite3.connect('database.db') as con:
+                cur = con.cursor()
+                cur.execute("DELETE FROM requester_new WHERE rowid=?", (rowid,))
+                # Note: Replace 'requester_new' with your actual table name
+
+                con.commit()
+                msg = "Record successfully deleted from the database"
+        except:
+            con.rollback()
+            msg = "Error in the DELETE"
+        finally:
+            con.close()
+    return redirect(url_for("review_forms"))  # Redirect to review forms page
 
 if __name__ == "__main__":
     app.run(debug=True)
