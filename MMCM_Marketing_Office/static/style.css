@@ -1,0 +1,71 @@
+/* Add background image to the body */
+body {
+    /* Specify the path to your background image */
+    background-image: url("/static/"); 
+    /* Set background properties */
+    background-size: cover; /* Cover the entire page */
+    background-position: center; /* Center the image */
+    /* Add other background properties as needed */
+}
+
+.navbar {
+    background-color: red;
+    font-size: 1em;
+    font-family: Arial, sans-serif;
+    color: white;
+    padding: 30px;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.navbar-brand {
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.navbar-item {
+    font-variant: small-caps;
+    margin-left: 30px;
+}
+
+.body-content {
+    padding: 5px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+ /* Sticky footer styles */
+ html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+.wrapper {
+    min-height: 90%;
+    margin-bottom: -5px; /* Negative value of footer height */
+}
+.footer{
+    height: 100px; /* Height of footer */
+    background-color: red;
+}
+
+.login-container {
+    width: 300px; /* Set the width of the container */
+    margin: auto; /* Center the container horizontally */
+    margin-top: 100px; /* Add space from the top */
+}
+
+.form-container {
+    width: 300px; /* Set the width of the container */
+    margin: auto; /* Center the container horizontally */
+    margin-top: 100px; /* Add space from the top */
+}
+
+.form-container {
+    width: 300px; /* Set the width of the container */
+    margin: auto; /* Center the container horizontally */
+    margin-top: 100px; /* Add space from the top */
+}
+

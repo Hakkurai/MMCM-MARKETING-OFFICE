@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Review Forms
+{% endblock %}
+
+{% block content %}
+    <h2>Review Forms</h2>
+
+    <!-- Requester Info Form -->
+    <h3>Requester Info Form</h3>
+    <table border="1px">
+        <thead>
+            <td><strong>Name</strong></td>
+            <td><strong>Email</strong></td>
+        </thead>
+        <tr>
+            <td></td>
+            <td>{{ requester_name }}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>{{ requester_email }}</td>
+        </tr>
+        <!-- Add other fields as needed -->
+    </table>
+    <br>
+    <button type="submit">Edit</button>
+    <button type="submit">Delete</button>
+
+    <!-- Project Info Form -->
+    <h3>Project Info Form</h3>
+    <table border="1px">
+        <thead>
+            <td><strong>Project ID</strong></td>
+            <td><strong>Requester ID</strong></td>
+            <td><strong>Output</strong></td>
+            <td><strong>Objective</strong></td>
+            <td><strong>Date Filed</strong></td>
+            <td><strong>Date Needed</strong></td>
+            <td><strong>Additional Info</strong></td>
+            <td><strong>Admin ID</strong></td>
+            <td><strong>Status ID</strong></td>
+        </thead>
+        <!-- Add rows for Project Info Form -->
+        <!-- Example row -->
+        <tr>
+            <td></td>
+            <td>{{ project_id }}</td>
+        </tr>
+        <!-- Add other rows as needed -->
+    </table>
+    <br>
+    <button type="submit">Edit</button>
+    <button type="submit">Delete</button>
+{% endblock %}
