@@ -15,56 +15,77 @@ def login():
     elif role == "admin":
         return redirect(url_for("admin_login"))
     else:
-        # Handle invalid role
         return "Invalid role"
 
 @app.route("/requester_form", methods=["GET", "POST"])
 def requester_form():
     if request.method == "POST":
-        # Handle form submission for requester form
-        name = request.form.get("name")
-        email = request.form.get("email")
-        contact = request.form.get("contact")
-        department = request.form.get("department")  # corrected field name
-        with sqlite3.connect('database.db') as conn:
-            cursor = conn.cursor()
-            cursor.execute("INSERT INTO requester_new (name, email, contact, department_id) VALUES (?, ?, ?, ?)", (name, email, contact, department))
-            conn.commit()
-        return redirect(url_for("project_info"))
+        if request.form.get("requester_id"):
+            requester_id = request.form.get("requester_id")
+            name = request.form.get("name")
+            email = request.form.get("email")
+            contact = request.form.get("contact")
+            department = request.form.get("department")
+            with sqlite3.connect('database.db') as conn:
+                cursor = conn.cursor()
+                cursor.execute("UPDATE requester_new SET name=?, email=?, contact=?, department_id=? WHERE requester_id=?", (name, email, contact, department, requester_id))
+                conn.commit()
+            return redirect(url_for("review_forms"))
+        else:
+            name = request.form.get("name")
+            email = request.form.get("email")
+            contact = request.form.get("contact")
+            department = request.form.get("department")
+            with sqlite3.connect('database.db') as conn:
+                cursor = conn.cursor()
+                cursor.execute("INSERT INTO requester_new (name, email, contact, department_id) VALUES (?, ?, ?, ?)", (name, email, contact, department))
+                conn.commit()
+            return redirect(url_for("project_info"))
     else:
-        # Render the requester form page
         return render_template("requester_form.html")
 
 @app.route("/project_info", methods=["GET", "POST"])
 def project_info():
     if request.method == "POST":
-        # Handle form submission for project info
-        project_title = request.form.get("project_title")
-        output = request.form.get("output")
-        objective = request.form.get("objective")
-        recipient = request.form.get("recipient")
-        mandatory = request.form.get("mandatory")
-        date_filed = request.form.get("date_filed")
-        date_needed = request.form.get("date_needed")
-        additional_info = request.form.get("additional_info")
-        with sqlite3.connect('database.db') as conn:
-            cursor = conn.cursor()
-            cursor.execute("INSERT INTO project_info_new1 (project_title, output, objective, recipient, mandatory, date_filed, date_needed, add_info) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-                           (project_title, output, objective, recipient, mandatory, date_filed, date_needed, additional_info))
-            conn.commit()
-        return redirect(url_for("home"))  # Redirect to home after submission
+        if request.form.get("project_id"):
+            project_id = request.form.get("project_id")
+            project_title = request.form.get("project_title")
+            output = request.form.get("output")
+            objective = request.form.get("objective")
+            recipient = request.form.get("recipient")
+            mandatory = request.form.get("mandatory")
+            date_filed = request.form.get("date_filed")
+            date_needed = request.form.get("date_needed")
+            additional_info = request.form.get("additional_info")
+            status_id = "active"  # Set status ID to active
+            with sqlite3.connect('database.db') as conn:
+                cursor = conn.cursor()
+                cursor.execute("UPDATE project_info_new1 SET project_title=?, output=?, objective=?, recipient=?, mandatory=?, date_filed=?, date_needed=?, add_info=?, status_id=? WHERE project_id=?", (project_title, output, objective, recipient, mandatory, date_filed, date_needed, additional_info, status_id, project_id))
+                conn.commit()
+            return redirect(url_for("review_forms"))
+        else:
+            project_title = request.form.get("project_title")
+            output = request.form.get("output")
+            objective = request.form.get("objective")
+            recipient = request.form.get("recipient")
+            mandatory = request.form.get("mandatory")
+            date_filed = request.form.get("date_filed")
+            date_needed = request.form.get("date_needed")
+            additional_info = request.form.get("additional_info")
+            status_id = "active"  # Set status ID to active
+            with sqlite3.connect('database.db') as conn:
+                cursor = conn.cursor()
+                cursor.execute("INSERT INTO project_info_new1 (project_title, output, objective, recipient, mandatory, date_filed, date_needed, add_info, status_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", (project_title, output, objective, recipient, mandatory, date_filed, date_needed, additional_info, status_id))
+                conn.commit()
+            return redirect(url_for("home"))  
     else:
-        # Render the project info form page
         return render_template("project_info.html")
 
 @app.route("/admin_login", methods=["GET", "POST"])
 def admin_login():
     if request.method == "POST":
-        # Handle admin login form submission
-        # Check credentials and perform necessary actions
-        return redirect(url_for("review_forms"))  # Redirect to review forms
+        return redirect(url_for("review_forms"))  
     else:
-        # Render the admin login page
         return render_template("admin_login.html")
 
 @app.route("/review_forms")
@@ -76,32 +97,27 @@ def review_forms():
         cursor.execute("SELECT * FROM project_info_new1")
         project_info_data = cursor.fetchall()
         
-    # Zipping the data together
     zipped_data = zip(requester_data, project_info_data)
     
     return render_template("review_forms.html", zipped_data=zipped_data)
 
-@app.route("/delete/<int:rowid>", methods=['POST'])
-def delete(rowid):
+@app.route("/delete", methods=['POST'])
+def delete():
+    requester_id = request.form['requester_id']
+    project_id = request.form['project_id']
     try:
-        # Connect to the database and DELETE a specific record based on rowid
         with sqlite3.connect('database.db') as con:
             cur = con.cursor()
-
-            # Delete from requester_new table
-            cur.execute("DELETE FROM requester_new WHERE rowid=?", (rowid,))
-
-            # Delete from project_info_new1 table (assuming the foreign key relationship is requester_id)
-            cur.execute("DELETE FROM project_info_new1 WHERE requester_id=?", (rowid,))
-
+            cur.execute("DELETE FROM requester_new WHERE requester_id=?", (requester_id,))
+            cur.execute("DELETE FROM project_info_new1 WHERE project_id=?", (project_id,))
             con.commit()
             msg = "Record successfully deleted from the database"
-    except:
+    except Exception as e:
         con.rollback()
-        msg = "Error in the DELETE"
+        msg = f"Error in the DELETE: {str(e)}"
     finally:
         con.close()
-    return redirect(url_for("review_forms"))  # Redirect to review forms page
+    return redirect(url_for("review_forms"))  
 
 if __name__ == "__main__":
     app.run(debug=True)

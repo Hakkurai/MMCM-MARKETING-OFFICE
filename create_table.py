@@ -3,7 +3,7 @@ import sqlite3
 conn = sqlite3.connect('database.db')
 print("Connected to the database successfully")
 
-# # Create tables in the appropriate order
+# Create tables in the appropriate order
 
 # # Department table
 # conn.execute('CREATE TABLE department_new (department_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT)')
