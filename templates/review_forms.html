@@ -42,13 +42,13 @@
     <td>{{ project_info_row[10] }}</td>
     <td>{{ project_info_row[11] }}</td>
     <td>
-        <form action="{{url_for('admin_login')}}" method="POST">
+        <form action="{{ url_for('admin_login') }}" method="POST">
             <input type="hidden" name="id" value="{{ project_info_row[0] }}">
             <input type="submit" value="Edit">
         </form>
     </td>
     <td>
-        <form onsubmit="return confirm('Are you sure you want to DELETE this Data from the Database?');" action="{{url_for('requester_form')}}" method="POST">
+        <form onsubmit="return confirm('Are you sure you want to DELETE this Data from the Database?');" action="{{ url_for('delete', rowid=project_info_row[0]) }}" method="POST">
             <input type="hidden" name="id" value="{{ project_info_row[0] }}">
             <input type="submit" value="Delete">
         </form>

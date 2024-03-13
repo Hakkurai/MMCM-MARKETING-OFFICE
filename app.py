@@ -81,25 +81,26 @@ def review_forms():
     
     return render_template("review_forms.html", zipped_data=zipped_data)
 
-@app.route("/delete", methods=['POST','GET'])
-def delete():
-    if request.method == 'POST':
-        try:
-            # Use the hidden input value of id from the form to get the rowid
-            rowid = request.form['id']
-            # Connect to the database and DELETE a specific record based on rowid
-            with sqlite3.connect('database.db') as con:
-                cur = con.cursor()
-                cur.execute("DELETE FROM requester_new WHERE rowid=?", (rowid,))
-                # Note: Replace 'requester_new' with your actual table name
+@app.route("/delete/<int:rowid>", methods=['POST'])
+def delete(rowid):
+    try:
+        # Connect to the database and DELETE a specific record based on rowid
+        with sqlite3.connect('database.db') as con:
+            cur = con.cursor()
 
-                con.commit()
-                msg = "Record successfully deleted from the database"
-        except:
-            con.rollback()
-            msg = "Error in the DELETE"
-        finally:
-            con.close()
+            # Delete from requester_new table
+            cur.execute("DELETE FROM requester_new WHERE rowid=?", (rowid,))
+
+            # Delete from project_info_new1 table (assuming the foreign key relationship is requester_id)
+            cur.execute("DELETE FROM project_info_new1 WHERE requester_id=?", (rowid,))
+
+            con.commit()
+            msg = "Record successfully deleted from the database"
+    except:
+        con.rollback()
+        msg = "Error in the DELETE"
+    finally:
+        con.close()
     return redirect(url_for("review_forms"))  # Redirect to review forms page
 
 if __name__ == "__main__":
