@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>{% block title %}{% endblock %}</title>
+    <!-- Link to your CSS file -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}" />
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="navbar">
+            
+            <a href="{{ url_for('home') }}" class="navbar-brand">Home</a>
+            <a href="{{ url_for('requester_form') }}" class="navbar-item"></a>
+            <a href="{{ url_for('login') }}" class="navbar-item"></a>
+        </div>
+
+        <div class="body-content">
+            {% block content %}
+            {% endblock %}
+        </div>
+
+        <div class="push"></div> <!-- Push footer to the bottom -->
+    </div>
+    <footer class="footer">
+    </footer>
+</body>
+</html>
