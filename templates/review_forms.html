@@ -3,23 +3,33 @@
     Review Forms
 {% endblock %}
 {% block content %}
+    <h3>Review Forms</h3>
+    <div style="text-align: right;">
+        <form action="{{ url_for('review_forms', sort_date='asc') }}" method="GET">
+            <input type="submit" value="Sort Ascending">
+        </form>
+        <form action="{{ url_for('review_forms', sort_date='desc') }}" method="GET">
+            <input type="submit" value="Sort Descending">
+        </form>
+    </div>
     <table border="1px">
-        <h3>Review Forms</h3>
         <thead>
-            <td><strong>Name</strong></td>
-            <td><strong>Email</strong></td>
-            <td><strong>Contact</strong></td>
-            <td><strong>Department</strong></td>
-            <td><strong>Project Title</strong></td>
-            <td><strong>Output</strong></td>
-            <td><strong>Objective</strong></td>
-            <td><strong>Recipient</strong></td>
-            <td><strong>Mandatory</strong></td>
-            <td><strong>Date Filed</strong></td>
-            <td><strong>Date Needed</strong></td>
-            <td><strong>Additional Info</strong></td>
-            <td><strong>Status ID</strong></td>
-            <td><strong>Action</strong></td>
+            <tr>
+                <th><strong>Name</strong></th>
+                <th><strong>Email</strong></th>
+                <th><strong>Contact</strong></th>
+                <th><strong>Department ID</strong></th>
+                <th><strong>Project Title</strong></th>
+                <th><strong>Output</strong></th>
+                <th><strong>Objective</strong></th>
+                <th><strong>Recipient</strong></th>
+                <th><strong>Mandatory</strong></th>
+                <th><strong>Date Filed</strong></th>
+                <th><strong>Date Needed</strong></th>
+                <th><strong>Additional Info</strong></th>
+                <th><strong>Status ID</strong></th>
+                <th><strong>Action</strong></th>
+            </tr>
         </thead>
         <tbody>
             {% for requester_row, project_info_row in zipped_data %}
