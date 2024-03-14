@@ -42,7 +42,13 @@ def requester_form():
                 conn.commit()
             return redirect(url_for("project_info"))
     else:
-        return render_template("requester_form.html")
+        # Fetch department data from the database
+        with sqlite3.connect('database.db') as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT department_id, name FROM department_new")
+            departments = cursor.fetchall()
+        # Render the template and pass the departments data to it
+        return render_template("requester_form.html", departments=departments)
 
 @app.route("/project_info", methods=["GET", "POST"])
 def project_info():

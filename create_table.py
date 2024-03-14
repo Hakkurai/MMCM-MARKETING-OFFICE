@@ -6,8 +6,8 @@ print("Connected to the database successfully")
 # Create tables in the appropriate order
 
 # # Department table
-# conn.execute('CREATE TABLE department_new (department_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT)')
-# print("Created department table new successfully!")
+ conn.execute('CREATE TABLE department_new (department_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOTNULL)')
+ print("Created department table new successfully!")
 
 # # Status table
 # conn.execute('''CREATE TABLE status_new (
@@ -75,7 +75,7 @@ print("Connected to the database successfully")
 # # Mandatory table
 # conn.execute('''CREATE TABLE mandatory_new (
 #                     mandatory_id INTEGER PRIMARY KEY AUTOINCREMENT, 
-#                     name TEXT
+#                     mandatory_text TEXT
 #                 )''')
 # print("Created mandatory table new successfully!")
 
@@ -107,6 +107,7 @@ print("Connected to the database successfully")
 # print("Created project_recipient_new1 table successfully!")
 
 # Requester table
+conn.execute("PRAGMA foreign_keys = ON")
 conn.execute('''CREATE TABLE requester_new (
                     requester_id INTEGER PRIMARY KEY AUTOINCREMENT, 
                     name TEXT, 
@@ -118,6 +119,7 @@ conn.execute('''CREATE TABLE requester_new (
 print("Created requester table new successfully!")
 
 # Project_info table
+conn.execute("PRAGMA foreign_keys = ON")
 conn.execute('''CREATE TABLE project_info_new1 (
                     project_id INTEGER PRIMARY KEY AUTOINCREMENT, 
                     requester_id INTEGER, 
@@ -125,12 +127,13 @@ conn.execute('''CREATE TABLE project_info_new1 (
                     output TEXT, 
                     objective TEXT, 
                     recipient TEXT,
-                    mandatory TEXT,
+                    mandatory_text TEXT,
                     date_filed TEXT, 
                     date_needed TEXT, 
                     add_info TEXT, 
                     admin_id INTEGER, 
                     status_id INTEGER, 
+                    FOREIGN KEY(mandatory_text) REFERENCES mandatory_new(mandatory_text),
                     FOREIGN KEY(requester_id) REFERENCES requester_new(requester_id), 
                     FOREIGN KEY(admin_id) REFERENCES admin_new(admin_id), 
                     FOREIGN KEY(status_id) REFERENCES status_new(status_id)

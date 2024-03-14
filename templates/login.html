@@ -1,21 +1,35 @@
-{% extends "layout.html" %}
-
-{% block title %}
-    Log in - Mapúa MCM Portal
-{% endblock %}
-
-{% block content %}
-    <div class="login-container">
-        <h2 style="font-size: 26px;">Login</h2>
-        <form action="{{ url_for('login') }}" method="post">
-            <input type="radio" name="role" value="student" id="student" style="font-size: 24px;">
-            <label for="student" style="font-size: 24px;">Student</label>
-            <input type="radio" name="role" value="admin" id="admin" style="font-size: 24px;">
-            <label for="admin" style="font-size: 24px;">Admin</label>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>LOG IN </title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/MMCM_Logo_noname.png') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='login.css')}}" />
+</head>
+<body>
+    <div class="box-form">
+        <div class="left">
+            <div class="overlay">
+            <h1>Mapua Malayan Colleges Mindanao</h1>
             <br>
-            <div style="margin-top: 20px;">
-            <button type="submit" style="font-size: 20px;">Login</button>
+            <br>
+            <p>Excellence and Relevance</p>
             </div>
+        </div>
+    <div class="right">
+        <form action="{{ url_for('login') }}" method="post">
+            <h5>Welcome</h5>
+        <div class = "inputs">
+            <input type="radio" name="role" value="student" id="student" style="font-size: 24px;">
+            <label for="student">Student</label>
+
+            <input type="radio" name="role" value="admin" id="admin" style="font-size: 24px;">
+            <label for="admin">Admin</label>
+            <br>
+            <button type="submit"">Continue</button>
+        </div>
         </form>
     </div>
-{% endblock %}
+</body>
+</html>

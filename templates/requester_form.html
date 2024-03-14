@@ -1,39 +1,59 @@
-{% extends "layout.html" %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title> Requester Form </title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/MMCM_Logo_noname.png') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='requester.css')}}" />
+</head>
+<body>
+    <div class="wrapper">
+        <div class="navbar">
+            <a href="{{ url_for('home') }}" class="navbar-brand">
+                <img src="../static/images/MMCM_Logo.png" class="img" alt="Home">Home
+                <div class="brand-container">
+                    <h1>Marketing Office</h1>
+                </div>
+            </a>
+            
+            <a href="{{ url_for('requester_form') }}" class="navbar-item"></a>
+            <a href="{{ url_for('login') }}" class="navbar-item"></a>
+        </div>
 
-{% block title %}
-    Requester Form
-{% endblock %}
-
-{% block content %}
-    <div class="form-container" style="width: 400px;">
-        <h2 style="font-size: 26px;">Requester Form</h2>
+        <h2 class = "req">Requester Form</h2>
+        
+    <div class="form-container">
         <form action="{{ url_for('requester_form') }}" method="post"> <!-- Corrected action -->
             <!-- Add form fields for requester info as needed -->
+        <div class = "inputs">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name"><br>
 
-            <label for="name" style="font-size: 24px;">Name:</label>
-            <input type="text" id="name" name="name" required style="width: 283px; font-size: 18px;"><br>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email"><br>
 
-            <label for="email" style="font-size: 24px;">Email:</label>
-            <input type="email" id="email" name="email" required style="width: 290px; font-size: 18px;"><br>
+            <label for="contact">Contact Number:</label>
+            <input type="text" id="contact" name="contact""><br>
 
-            <label for="contact" style="font-size: 24px;">Contact:</label>
-            <input type="text" id="contact" name="contact" required style="width: 290px; font-size: 18px;"><br>
-
-            <label for="department" style="font-size: 24px;">Department:</label>
-            <select id="department" name="department" required style="width: 290px; font-size: 18px;">
-                <option value="CEA">CEA</option>
-                <option value="CCIS">CCIS</option>
-                <option value="CAS">CAS</option>
-                <option value="ATYCB">ATYCB</option>
-                <option value="CHS">CHS</option>
-                <option value="MMCM OFFICES">MMCM OFFICES</option>
-                <option value="OTHERS">OTHERS</option>
+            <label for="department">Department:</label>
+            <select id="department" name="department">
+             {% for department in departments %}
+            <option value="{{ department[0] }}">{{ department[1] }}</option>
+            {% endfor %}
             </select><br>
-            
+
+        </div>
+        
             <!-- Add other fields as needed -->
             <div style="margin-top: 20px;">
-                <button type="submit" style="font-size: 20px;">Next</button>
+                <button type="submit" class="button">Next</button>
             </div>
         </form>
     </div>
-{% endblock %}
+    <div class="push"></div> <!-- Push footer to the bottom -->
+    </div>
+    <footer class="footer">
+    </footer>
+</body>
+</html>

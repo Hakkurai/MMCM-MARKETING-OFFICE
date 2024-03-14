@@ -1,0 +1,202 @@
+
+@font-face {
+    font-family: 'Montserrat-Regular';
+    src: url('../static/fonts/Montserrat-Regular.ttf') format('truetype');
+  }
+  
+  @font-face {
+    font-family: 'Montserrat-Bold';
+    src: url('../static/fonts/Montserrat-Bold.ttf') format('truetype');
+  }
+  
+  @font-face {
+    font-family: 'Montserrat-ExtraBold';
+    src: url('../static/fonts/Montserrat-ExtraBold.ttf') format('truetype');
+  }
+  
+  @font-face {
+      font-family: 'Lato';
+      src: url('../static/fonts/Lato-Regular.ttf') format('truetype');
+  }
+  
+  html,
+  body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+  }
+  
+  body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #ffffff;
+      color: #333333;
+  }
+  
+  .box-form {
+      width: 80%;
+      max-width: 1200px; /* optional: adjust the maximum width as needed */
+      background: #FFFFFF;
+      border-radius: 10px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: row;
+      box-shadow: 0 0 20px 6px #090b6f85;
+  }
+    .box-form {
+      margin: 0 auto;
+      width: 80%;
+      background: #FFFFFF;
+      border-radius: 10px;
+      overflow: hidden;
+      display: flex;
+      flex: 1 1 100%;
+      align-items: stretch;
+      justify-content: space-between;
+      box-shadow: 0 0 20px 6px #090b6f85;
+    }
+    
+    @media (max-width: 980px) {
+      .box-form {
+        flex-flow: wrap;
+        text-align: center;
+        align-content: center;
+        align-items: center;
+      }
+    }
+    .box-form div {
+      height: auto;
+    }
+    .box-form .left {
+      color: #FFFFFF;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-image: url("../static/images/login.png");
+      overflow: hidden;
+    }
+    .box-form .left .overlay {
+      padding: 30px;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+          to right,
+          rgba(0, 0, 0, 0.8) 0%,
+          rgba(0, 0, 0, 0.2) 100%
+      );
+      overflow: hidden;
+      box-sizing: border-box;
+  }
+  
+    .box-form .left .overlay h1 {
+      font-size: 4vmax;
+      line-height: 1;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      font-family: "Montserrat-ExtraBold";
+      text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);;
+    }
+    
+    .box-form .left .overlay p {
+      font-family: "Montserrat-Regular";
+      margin-top: 30px;
+    }
+    .box-form .left .overlay span a {
+      background: #3b5998;
+      color: #FFFFFF;
+      margin-top: 10px;
+      padding: 14px 50px;
+      border-radius: 100px;
+      display: inline-block;
+      box-shadow: 0 3px 6px 1px #042d4657;
+    }
+
+    .box-form .right {
+      font-family: 'Montserrat-Regular';
+      padding: 40px;
+      overflow: hidden;
+      width: calc(100% - 650px); /* Adjust the width as needed */
+    }
+    @media (max-width: 980px) {
+      .box-form .right {
+        width: 100%;
+      }
+    }
+
+    .box-form .right h5 {
+        font-family: "Montserrat-Bold";
+        width: 100%; /* Set the width to 100% */
+        margin-top: auto; /* Adjust margin if needed */
+        color: #fff;
+        text-align: left;
+        font-size: 3.5em;
+        padding: 12px 35px;
+        display: relative;
+        border: 0;
+        outline: 0;
+        background-color: #1f37b0;
+    }
+    
+    .box-form .right h6{
+      font-size: 1vmax;
+      color: #B0B3B9;
+      font-weight: 100;
+    }
+    .box-form .right p {
+      font-size: 14px;
+      color: #B0B3B9;
+    }
+    .box-form .right .inputs {
+      overflow: hidden;
+    }
+ 
+  .box-form .right button {
+      font-family: "Montserrat-Bold";
+      width: 100%; /* Set the width to 100% */
+      margin-top: 25px; /* Adjust margin if needed */
+      color: #fff;
+      font-size: 16px;
+      padding: 12px 35px;
+      border-radius: 50px;
+      display: inline-block;
+      border: 0;
+      outline: 0;
+      background-color: #e50019;
+      transition: box-shadow 0.3s, background-color 0.3s; /* Added transition */
+  }
+  
+  .box-form .right button:hover {
+      background-color:  #258354; /* Adjusted background color on hover */
+  }
+
+    
+.inputs input[type="radio"] {
+  display: none; /* Hide the actual radio buttons */
+}
+
+/* Style for labels */
+.inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center items vertically */
+    justify-content: center; /* Center items horizontally */
+  }
+  
+  .inputs label {
+    font-family: "Montserrat-Bold";
+    color: #e50019;
+    font-size: 2.5em;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  /* Apply hover effect directly to the label within .inputs */
+  .inputs label:hover {
+    color: #1f37b0;
+  }
+  
+  /* Style for radio button when selected */
+  .inputs input[type="radio"]:checked + label {
+    color: #1f37b0; /* Change color when selected */
+  }
+  /* green hexcode  #258354;

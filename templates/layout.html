@@ -2,15 +2,13 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>{% block title %}{% endblock %}</title>
-    <!-- Link to your CSS file -->
+    <title> </title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/MMCM_Logo_noname.png') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}" />
 </head>
-
 <body>
     <div class="wrapper">
         <div class="navbar">
-            
             <a href="{{ url_for('home') }}" class="navbar-brand">Home</a>
             <a href="{{ url_for('requester_form') }}" class="navbar-item"></a>
             <a href="{{ url_for('login') }}" class="navbar-item"></a>

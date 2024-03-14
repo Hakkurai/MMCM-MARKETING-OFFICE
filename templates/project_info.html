@@ -1,15 +1,24 @@
-<!-- project_info.html -->
-{% extends "layout.html" %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title> Requester Form </title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/MMCM_Logo_noname.png') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='requester.css')}}" />
+</head>
+<body>
+    <div class="wrapper">
+        <div class="navbar">
+            <a href="{{ url_for('home') }}" class="navbar-brand">Home</a>
+            <a href="{{ url_for('requester_form') }}" class="navbar-item"></a>
+            <a href="{{ url_for('login') }}" class="navbar-item"></a>
+        </div>
+                <h2 class = "req">Project Information</h2>
 
-{% block title %}
-    Project Info Form
-{% endblock %}
-
-{% block content %}
     <div class="form-container">
-        <h2>Project Info Form</h2>
         <form action="{{ url_for('project_info') }}" method="post">
-
+            <div class = "inputs">
             <label for="project_title">Project Title:</label>
             <input type="text" id="project_title" name="project_title" required><br>
 
@@ -32,9 +41,18 @@
             <input type="date" id="date_needed" name="date_needed" required><br>
 
             <label for="additional_info">Additional Info:</label>
-            <textarea id="additional_info" name="additional_info"></textarea><br>
-
-            <button type="submit">Submit</button>
-        </form>
-    </div>
-{% endblock %}
+            <input id="additional_info" name="additional_info"><br>
+        </div>
+        
+        <!-- Add other fields as needed -->
+        <div style="margin-top: 20px;">
+            <button type="submit" class="button">Next</button>
+        </div>
+    </form>
+</div>
+<div class="push"></div> <!-- Push footer to the bottom -->
+</div>
+<footer class="footer">
+</footer>
+</body>
+</html>
