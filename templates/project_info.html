@@ -10,7 +10,13 @@
 <body>
     <div class="wrapper">
         <div class="navbar">
-            <a href="{{ url_for('home') }}" class="navbar-brand">Home</a>
+            <a href="{{ url_for('home') }}" class="navbar-brand">
+                <img src="../static/images/MMCM_Logo.png" class="img">
+                <div class="brand-container">
+                    <h1>Marketing Office</h1>
+                </div>
+            </a>
+            
             <a href="{{ url_for('requester_form') }}" class="navbar-item"></a>
             <a href="{{ url_for('login') }}" class="navbar-item"></a>
         </div>
@@ -41,7 +47,7 @@
             <input type="date" id="date_needed" name="date_needed" required><br>
 
             <label for="additional_info">Additional Info:</label>
-            <input id="additional_info" name="additional_info"><br>
+            <input type="text" id="additional_info" name="additional_info"><br>
         </div>
         
         <!-- Add other fields as needed -->

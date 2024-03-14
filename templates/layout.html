@@ -9,7 +9,12 @@
 <body>
     <div class="wrapper">
         <div class="navbar">
-            <a href="{{ url_for('home') }}" class="navbar-brand">Home</a>
+            <a href="{{ url_for('home') }}" class="navbar-brand">
+                <img src="../static/images/MMCM_Logo.png" class="img">
+                <div class="brand-container">
+                    <h1>Marketing Office</h1>
+                </div>
+            </a>
             <a href="{{ url_for('project_info') }}" class="navbar-item"></a>
             <a href="{{ url_for('login') }}" class="navbar-item"></a>
             <a href="{{ url_for('personnel') }}" class="navbar-item">Personnel</a>

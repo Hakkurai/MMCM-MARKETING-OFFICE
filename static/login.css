@@ -135,6 +135,7 @@
         border: 0;
         outline: 0;
         background-color: #1f37b0;
+        box-shadow: 0 3px 6px 1px #042d4657;
     }
     
     .box-form .right h6{
@@ -183,8 +184,9 @@
   }
   
   .inputs label {
-    font-family: "Montserrat-Bold";
-    color: #e50019;
+    font-family: 'Montserrat-Bold';
+    font-weight: bolder;
+    color: #5f5657;
     font-size: 2.5em;
     text-align: center;
     cursor: pointer;

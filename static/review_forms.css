@@ -1,0 +1,35 @@
+
+
+
+.table-container {
+    margin: 25px auto; /* Add margin to the top and bottom, and center horizontally */
+    width: 80%; /* Adjust the width as needed */
+    padding-bottom: 2em;
+}
+
+
+.review {
+    border-collapse: collapse; /* Collapse borders */
+    width: 100%; /* Make the table fill its container */
+}
+
+.review th,
+.review td {
+    padding: 10px; /* Add padding to cells */
+    text-align: center; /* Center-align content */
+    border: 1px solid #000; /* Border color */
+}
+
+.review th {
+    background-color: #f2f2f2; /* Header background color */
+}
+
+.personnel-title {
+    font-family: 'Montserrat-Bold';
+    color: #000;
+    text-align: center; /* Center the text horizontally */
+    padding: 10px; /* Adjust the padding as needed */
+    font-size: 4em;
+    display: fixed;
+    margin: 0 auto; /* Set left and right margins to auto */
+}

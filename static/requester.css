@@ -37,6 +37,15 @@
     border-radius: 4px;
 }
 
+.inputs input[type="text"],
+.inputs input[type="email"],
+.inputs select,
+.inputs select option {
+    font-family: 'Montserrat-Regular', sans-serif;
+    /* Add other styling properties as needed */
+}
+
+
 /* Style for the form actions */
 .form-actions {
     text-align: center;

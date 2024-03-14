@@ -1,18 +1,39 @@
-{% extends "layout.html" %}
-{% block title %}
-    Review Forms
-{% endblock %}
-{% block content %}
-    <h3>Review Forms</h3>
-    <div style="text-align: right;">
-        <form action="{{ url_for('review_forms', sort_date='asc') }}" method="GET">
-            <input type="submit" value="Sort Ascending">
-        </form>
-        <form action="{{ url_for('review_forms', sort_date='desc') }}" method="GET">
-            <input type="submit" value="Sort Descending">
-        </form>
-    </div>
-    <table border="1px">
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title> Review Forms </title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/MMCM_Logo_noname.png') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='requester.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='review_forms.css')}}" />
+</head>
+<body>
+    <div class="wrapper">
+        <div class="navbar">
+            <a href="{{ url_for('home') }}" class="navbar-brand">
+                <img src="../static/images/MMCM_Logo.png" class="img">
+
+                <div class="brand-container">
+                    <h1>Marketing Office</h1>
+                </div>
+            </a>
+            <a href="{{ url_for('review_forms') }}" class="button_p">Review Forms</a>
+            <a href="{{ url_for('personnel') }}" class="button_p">Personnel</a>
+            <a href="{{ url_for('login') }}" class="navbar-item"></a>
+        </div>
+        <h2 class="req">Review Forms</h2>
+<!--
+<form action="{{ url_for('review_forms', sort_criteria='date_needed', sort_order='asc') }}" method="GET">
+    <input type="submit" class="button_sort" value="Sort Ascending">
+</form>
+<form action="{{ url_for('review_forms', sort_criteria='date_needed', sort_order='desc') }}" method="GET">
+    <input type="submit" class="button_sort" value="Sort Descending">
+</form>
+-->
+
+<div class="table-container">   
+    <table class="review">
         <thead>
             <tr>
                 <th><strong>Name</strong></th>
@@ -51,11 +72,14 @@
         <form onsubmit="return confirm('Are you sure you want to DELETE this Data from the Database?');" action="{{ url_for('delete', requester_id=requester_row[0], project_id=project_info_row[0]) }}" method="POST">
             <input type="hidden" name="requester_id" value="{{ requester_row[0] }}">
             <input type="hidden" name="project_id" value="{{ project_info_row[0] }}">
-            <input type="submit" value="Delete">
+            <input type="submit" class="button_delete" value="Delete">
         </form>
     </td>
 </tr>
 {% endfor %}
         </tbody>
     </table>
-{% endblock %}
+</div>
+</div>
+</body>
+</html>

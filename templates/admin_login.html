@@ -1,22 +1,61 @@
-{% extends "layout.html" %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title> Requester Form </title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/MMCM_Logo_noname.png') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='requester.css')}}" />
+</head>
+<body>
+    <div class="wrapper">
+        <div class="navbar">
+            <a href="{{ url_for('home') }}" class="navbar-brand">
+                <img src="../static/images/MMCM_Logo.png" class="img">
+                <div class="brand-container">
+                    <h1>Marketing Office</h1>
+                </div>
+            </a>
+        </div>
 
-{% block title %}
-    Admin Login
-{% endblock %}
+        <h2 class="req">Admin Login</h2>
 
-{% block content %}
-    <div class="form-container">
-        <h2 style="font-size: 26px;">Admin Login</h2>
-        <form action="{{ url_for('admin_login') }}" method="post">
-            <label for="username" style="font-size: 24px;">Username:</label>
-            <input type="text" id="username" name="username" required style="width: 290px; font-size: 18px;"><br>
+        <div class="form-container-admin">
+            <form action="{{ url_for('admin_login') }}" method="post" onsubmit="return login()">
+                <div class="inputs">
+                    <label for="username" class="login">Username:</label>
+                    <input type="text" id="username" name="username"><br>
 
-            <label for="password" style="font-size: 24px;">Password:</label>
-            <input type="password" id="password" name="password" required style="width: 290px; font-size: 18px;"><br>
+                    <label for="password" class = "login">Password:</label>
+                    <input type="password" id="password" name="password"><br>
 
-            <div style="margin-top: 20px;">
-                <button type="submit" style="font-size: 24px;">Login</button>
-            </div>
-        </form>
+                    <div style="margin-top: 20px;">
+                        <button type="submit" class="button">Login</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <script>
+            function login() {
+                // Retrieve input values
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+
+                // Check if credentials are correct
+                if (username === 'admin' && password === 'admin123') {
+                    // Redirect to the main page (change the URL accordingly)
+                    window.location.href = "{{ url_for('review_forms') }}";
+                    return true; // Allow form submission
+                } else {
+                    alert('Invalid username or password. Please try again.');
+                    return false; // Prevent form submission
+                }
+            }
+        </script>
+
+        <div class="push"></div> <!-- Push footer to the bottom -->
     </div>
-{% endblock %}
+    <footer class="footer">
+    </footer>
+</body>
+</html>
